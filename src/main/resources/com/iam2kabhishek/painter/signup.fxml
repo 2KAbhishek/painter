@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="243.0" prefWidth="306.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iam2kabhishek.painter.SignUpController">
+    <children>
+        <Label text="Painter Sign Up" />
+        <TextField fx:id="userSignup" promptText="Username" />
+        <PasswordField fx:id="passSignup" promptText="Password" />
+        <Button fx:id="registerButton" defaultButton="true" onAction="#registerUser" text="Register" />
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+</VBox>
