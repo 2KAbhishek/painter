@@ -37,6 +37,8 @@ import javafx.stage.Stage;
 
 public class Painter extends Application {
 
+    private final int CANVAS_WIDTH = 1280;
+    private final int CANVAS_HEIGHT = 720;
     public static void main(String[] args) {
         launch(args);
     }
