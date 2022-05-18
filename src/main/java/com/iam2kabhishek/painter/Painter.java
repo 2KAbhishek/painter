@@ -55,6 +55,83 @@ public class Painter extends Application {
         });
     }
 
+    private void setupUndo(Stack<Shape> undoHistory, Stack<Shape> redoHistory, Button undo, GraphicsContext gc) {
+        undo.setOnAction(e -> {
+            if (!undoHistory.empty()) {
+                gc.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+                Shape removedShape = undoHistory.lastElement();
+                if (removedShape.getClass() == Line.class) {
+                    Line tempLine = (Line) removedShape;
+                    tempLine.setFill(gc.getFill());
+                    tempLine.setStroke(gc.getStroke());
+                    tempLine.setStrokeWidth(gc.getLineWidth());
+                    redoHistory.push(new Line(tempLine.getStartX(), tempLine.getStartY(), tempLine.getEndX(),
+                            tempLine.getEndY()));
+
+                } else if (removedShape.getClass() == Rectangle.class) {
+                    Rectangle tempRect = (Rectangle) removedShape;
+                    tempRect.setFill(gc.getFill());
+                    tempRect.setStroke(gc.getStroke());
+                    tempRect.setStrokeWidth(gc.getLineWidth());
+                    redoHistory.push(
+                            new Rectangle(tempRect.getX(), tempRect.getY(), tempRect.getWidth(), tempRect.getHeight()));
+                } else if (removedShape.getClass() == Circle.class) {
+                    Circle tempCirc = (Circle) removedShape;
+                    tempCirc.setStrokeWidth(gc.getLineWidth());
+                    tempCirc.setFill(gc.getFill());
+                    tempCirc.setStroke(gc.getStroke());
+                    redoHistory.push(new Circle(tempCirc.getCenterX(), tempCirc.getCenterY(), tempCirc.getRadius()));
+                } else if (removedShape.getClass() == Ellipse.class) {
+                    Ellipse tempEllipse = (Ellipse) removedShape;
+                    tempEllipse.setFill(gc.getFill());
+                    tempEllipse.setStroke(gc.getStroke());
+                    tempEllipse.setStrokeWidth(gc.getLineWidth());
+                    redoHistory.push(
+                            new Ellipse(tempEllipse.getCenterX(), tempEllipse.getCenterY(), tempEllipse.getRadiusX(),
+                                    tempEllipse.getRadiusY()));
+                }
+                Shape lastRedo = redoHistory.lastElement();
+                lastRedo.setFill(removedShape.getFill());
+                lastRedo.setStroke(removedShape.getStroke());
+                lastRedo.setStrokeWidth(removedShape.getStrokeWidth());
+                undoHistory.pop();
+
+                for (int i = 0; i < undoHistory.size(); i++) {
+                    Shape shape = undoHistory.elementAt(i);
+                    if (shape.getClass() == Line.class) {
+                        Line temp = (Line) shape;
+                        gc.setLineWidth(temp.getStrokeWidth());
+                        gc.setStroke(temp.getStroke());
+                        gc.setFill(temp.getFill());
+                        gc.strokeLine(temp.getStartX(), temp.getStartY(), temp.getEndX(), temp.getEndY());
+                    } else if (shape.getClass() == Rectangle.class) {
+                        Rectangle temp = (Rectangle) shape;
+                        gc.setLineWidth(temp.getStrokeWidth());
+                        gc.setStroke(temp.getStroke());
+                        gc.setFill(temp.getFill());
+                        gc.fillRect(temp.getX(), temp.getY(), temp.getWidth(), temp.getHeight());
+                        gc.strokeRect(temp.getX(), temp.getY(), temp.getWidth(), temp.getHeight());
+                    } else if (shape.getClass() == Circle.class) {
+                        Circle temp = (Circle) shape;
+                        gc.setLineWidth(temp.getStrokeWidth());
+                        gc.setStroke(temp.getStroke());
+                        gc.setFill(temp.getFill());
+                        gc.fillOval(temp.getCenterX(), temp.getCenterY(), temp.getRadius(), temp.getRadius());
+                        gc.strokeOval(temp.getCenterX(), temp.getCenterY(), temp.getRadius(), temp.getRadius());
+                    } else if (shape.getClass() == Ellipse.class) {
+                        Ellipse temp = (Ellipse) shape;
+                        gc.setLineWidth(temp.getStrokeWidth());
+                        gc.setStroke(temp.getStroke());
+                        gc.setFill(temp.getFill());
+                        gc.fillOval(temp.getCenterX(), temp.getCenterY(), temp.getRadiusX(), temp.getRadiusY());
+                        gc.strokeOval(temp.getCenterX(), temp.getCenterY(), temp.getRadiusX(), temp.getRadiusY());
+                    }
+                }
+            } else {
+                System.out.println("there is no action to undo");
+            }
+        });
+    }
     public static void main(String[] args) {
         launch(args);
     }
