@@ -47,6 +47,14 @@ public class Painter extends Application {
         });
     }
 
+    private void setupClear(Stack<Shape> undoHistory, Stack<Shape> redoHistory, Button clear, GraphicsContext gc) {
+        clear.setOnAction(e -> {
+            gc.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+            undoHistory.clear();
+            redoHistory.clear();
+        });
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
