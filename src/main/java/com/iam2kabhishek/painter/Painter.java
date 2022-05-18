@@ -132,6 +132,57 @@ public class Painter extends Application {
             }
         });
     }
+
+    private void setupRedo(Stack<Shape> undoHistory, Stack<Shape> redoHistory, Button redo, GraphicsContext gc) {
+        redo.setOnAction(e -> {
+            if (!redoHistory.empty()) {
+                Shape shape = redoHistory.lastElement();
+                gc.setLineWidth(shape.getStrokeWidth());
+                gc.setStroke(shape.getStroke());
+                gc.setFill(shape.getFill());
+
+                redoHistory.pop();
+                if (shape.getClass() == Line.class) {
+                    Line tempLine = (Line) shape;
+                    gc.strokeLine(tempLine.getStartX(), tempLine.getStartY(), tempLine.getEndX(), tempLine.getEndY());
+                    undoHistory.push(new Line(tempLine.getStartX(), tempLine.getStartY(), tempLine.getEndX(),
+                            tempLine.getEndY()));
+                } else if (shape.getClass() == Rectangle.class) {
+                    Rectangle tempRect = (Rectangle) shape;
+                    gc.fillRect(tempRect.getX(), tempRect.getY(), tempRect.getWidth(), tempRect.getHeight());
+                    gc.strokeRect(tempRect.getX(), tempRect.getY(), tempRect.getWidth(), tempRect.getHeight());
+
+                    undoHistory.push(
+                            new Rectangle(tempRect.getX(), tempRect.getY(), tempRect.getWidth(), tempRect.getHeight()));
+                } else if (shape.getClass() == Circle.class) {
+                    Circle tempCirc = (Circle) shape;
+                    gc.fillOval(tempCirc.getCenterX(), tempCirc.getCenterY(), tempCirc.getRadius(),
+                            tempCirc.getRadius());
+                    gc.strokeOval(tempCirc.getCenterX(), tempCirc.getCenterY(), tempCirc.getRadius(),
+                            tempCirc.getRadius());
+
+                    undoHistory.push(new Circle(tempCirc.getCenterX(), tempCirc.getCenterY(), tempCirc.getRadius()));
+                } else if (shape.getClass() == Ellipse.class) {
+                    Ellipse tempEllipse = (Ellipse) shape;
+                    gc.fillOval(tempEllipse.getCenterX(), tempEllipse.getCenterY(), tempEllipse.getRadiusX(),
+                            tempEllipse.getRadiusY());
+                    gc.strokeOval(tempEllipse.getCenterX(), tempEllipse.getCenterY(), tempEllipse.getRadiusX(),
+                            tempEllipse.getRadiusY());
+
+                    undoHistory.push(
+                            new Ellipse(tempEllipse.getCenterX(), tempEllipse.getCenterY(), tempEllipse.getRadiusX(),
+                                    tempEllipse.getRadiusY()));
+                }
+                Shape lastUndo = undoHistory.lastElement();
+                lastUndo.setFill(gc.getFill());
+                lastUndo.setStroke(gc.getStroke());
+                lastUndo.setStrokeWidth(gc.getLineWidth());
+            } else {
+                System.out.println("there is no action to redo");
+            }
+        });
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
