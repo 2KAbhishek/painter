@@ -39,6 +39,14 @@ public class Painter extends Application {
 
     private final int CANVAS_WIDTH = 1280;
     private final int CANVAS_HEIGHT = 720;
+
+    private void setupFill(Button fillBtn, GraphicsContext gc, ColorPicker cpFill) {
+        fillBtn.setOnAction(e -> {
+            gc.setFill(cpFill.getValue());
+            gc.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        });
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
