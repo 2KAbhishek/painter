@@ -183,6 +183,28 @@ public class Painter extends Application {
         });
     }
 
+    private void setupSave(Stage primaryStage, Button save, Canvas canvas) {
+        save.setOnAction((e) -> {
+            FileChooser saveFile = new FileChooser();
+            saveFile.setTitle("Save File");
+
+            File file = saveFile.showSaveDialog(primaryStage);
+            if (file != null) {
+                try {
+                    // TODO: Issues with imports, fix this
+                    WritableImage writableImage = new WritableImage(CANVAS_WIDTH, CANVAS_HEIGHT);
+                    canvas.snapshot(null, writableImage);
+                    // OutputStream output = new FileOutputStream(file);
+                    // ImageIO.write(Stream.wrap(output), "png", writableImage);
+
+                } catch (Exception ex) {
+                    System.out.println("Error!");
+                }
+            }
+
+        });
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
