@@ -26,7 +26,7 @@
 <h3>Short sweet headline with 🎇🎉</h3>
 
 <figure>
-  <img src= "https://raw.githubusercontent.com/2KAbhishek/painter/main/images/screenshot.jpg" alt="painter Demo" style="width:100%">
+  <img src= "https://raw.githubusercontent.com/2KAbhishek/painter/main/images/screenshot.png" alt="painter Demo" style="width:100%">
   <br/>
   <figcaption>painter screenshot</figcaption>
 </figure>
