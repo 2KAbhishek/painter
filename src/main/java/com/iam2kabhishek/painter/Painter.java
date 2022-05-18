@@ -222,6 +222,13 @@ public class Painter extends Application {
         });
     }
 
+    private void setupExit(Stage primaryStage, Button exitBtn) {
+        exitBtn.setOnAction(e -> {
+            primaryStage.close();
+            App.multiLaunch(App.class);
+        });
+    }
+
     @Override
     public void start(Stage primaryStage) {
         Stack<Shape> undoHistory = new Stack();
