@@ -1,6 +1,7 @@
 package com.iam2kabhishek.painter;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,9 +16,29 @@ public class App extends Application {
 
     private static Scene scene;
 
+    private static volatile boolean javaFxLaunched = false;
+
+    public static void multiLaunch(Class<? extends Application> applicationClass) {
+        if (!javaFxLaunched) { // First time
+            Platform.setImplicitExit(false);
+            new Thread(() -> Application.launch(applicationClass)).start();
+            javaFxLaunched = true;
+        } else { // Next times
+            Platform.runLater(() -> {
+                try {
+                    Application application = applicationClass.newInstance();
+                    Stage primaryStage = new Stage();
+                    application.start(primaryStage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("login"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }
@@ -32,7 +53,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        multiLaunch(App.class);
     }
 
 }
