@@ -205,6 +205,23 @@ public class Painter extends Application {
         });
     }
 
+    private void setupOpen(Stage primaryStage, Button open, GraphicsContext gc) {
+        open.setOnAction((e) -> {
+            FileChooser openFile = new FileChooser();
+            openFile.setTitle("Open File");
+            File file = openFile.showOpenDialog(primaryStage);
+            if (file != null) {
+                try {
+                    InputStream io = new FileInputStream(file);
+                    Image img = new Image(io);
+                    gc.drawImage(img, 0, 0);
+                } catch (IOException ex) {
+                    System.out.println("Error!");
+                }
+            }
+        });
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
