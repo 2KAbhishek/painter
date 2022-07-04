@@ -1,6 +1,6 @@
 <div align = "center">
 
-<h1><a href="https://2kabhishek.github.io/painter">painter</a></h1>
+<h1><a href="https://2kabhishek.github.io/painter">Painter</a></h1>
 
 <a href="https://github.com/2KAbhishek/painter/blob/main/LICENSE">
 <img alt="License" src="https://img.shields.io/github/license/2kabhishek/painter?style=plastic&color=white&label=License"> </a>
@@ -23,7 +23,7 @@
 <a href="https://github.com/2KAbhishek?tab=followers">
 <img alt="Followers" src="https://img.shields.io/github/followers/2kabhishek?color=222&style=plastic&label=Followers"> </a>
 
-<h3>Short sweet headline with 🎇🎉</h3>
+<h3>Paint your imagination 🎨🖌️</h3>
 
 <figure>
   <img src= "images/screenshot.png" alt="painter Demo" style="width:auto">
@@ -35,17 +35,17 @@
 
 ## What is this
 
-painter is a `<utility/tool/feature>` that allows `<insert_target_audience>` to do `<action/task_it_does>`.
+Painter is a GUI app that lets you paint your imagination.
 
 ## Inspiration
 
-painter was inspired by `<reason/idea>`.
+Always wanted to make a paint app, discovered the JavaFX library.
 
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
 
-- You have installed the latest version of `<coding_language/dependency/requirement_1>`
+- You have installed the latest version of `JavaFX`
 
 ## Getting painter
 
@@ -54,51 +54,28 @@ To install painter, follow these steps:
 ```bash
 git clone https://github.com/2kabhishek/painter
 cd painter
-<install_command>
 ```
 
 ## Using painter
 
-```bash
-USAGE:
-    command [FLAGS] [OPTIONS]
-
-FLAGS:
-    -h, --help              Prints help information.
-
-OPTIONS:
-    -o, --option <value>    Option description.
-    Options are: a, b. [default: a]
-
-Example:
-
-
-```
+Use `VS Code` to open the `painter` folder, run the `App.java` file and enjoy painting.
 
 ## How it was built
 
-painter was built using `<tech/library>`
+painter was built using `VS Code` and `JavaFX`.
 
 ## Challenges faced
 
-While building painter the main challenges were `<issue/difficulty>`
+Designing the GUI in Java was a challenge.
 
 ## What I learned
 
-While building painter I `<learned/accomplished>` about `<learning/accomplishment>`
+- Explored JavaFX further and learned about various features.
+- Learned how to design the GUI in Java.
 
 ## What's next
 
-Planning to add `<feature/module>`.
-
-### To-Do
-
-- [x] Setup repo
-- [ ] Think real hard
-- [ ] Start typing
-- [ ] Change me
-- [ ] Update README
-- [ ] Finish it
+Saving functionality is not working.
 
 Hit the ⭐ button if you found this useful.
 
